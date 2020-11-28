@@ -1,5 +1,6 @@
 #include "GUI.h"
 #include "../Courses/Course.h"
+#include "Notezz.h"
 #include "../StudyPlan/AcademicYear.h"
 #include <sstream>
 
@@ -40,6 +41,7 @@ void GUI::CreateMenu() const
 	//First prepare List of images paths for menu item
 	string MenuItemImages[ITM_CNT];
 	MenuItemImages[ITM_ADD] = "GUI\\Images\\Menu\\Menu_add_course.jpg";
+	MenuItemImages[ITM_AddNote] = "GUI\\Images\\Menu\\Menu_Add_Note.jpg";
 	MenuItemImages[ITM_EXIT] = "GUI\\Images\\Menu\\Menu_Exit.jpg";
 
 	//TODO: Prepare image for each menu item and add it to the list
@@ -103,6 +105,28 @@ void GUI::DrawCourse(const Course* pCrs)
 	pWind->DrawString(Code_x, Code_y + CRS_HEIGHT/2, crd.str());
 }
 
+void GUI::DrawNote(const Notezz* pNote)
+{
+	if (pNote->isSelected())
+		pWind->SetPen(HiColor, 2);
+	else
+		pWind->SetPen(DrawColor, 2);
+	pWind->SetBrush(FillColor);
+	graphicsInfo gInfo = pNote->getGfxInfo();
+	pWind->DrawRectangle(gInfo.x, gInfo.y, gInfo.x + CRS_WIDTH, gInfo.y + CRS_HEIGHT);
+	pWind->DrawLine(gInfo.x, gInfo.y + CRS_HEIGHT / 2, gInfo.x + CRS_WIDTH, gInfo.y + CRS_HEIGHT / 2);
+
+	//Write the content.
+	int Code_x = gInfo.x + CRS_WIDTH * 0.15;
+	int Code_y = gInfo.y + CRS_HEIGHT * 0.05;
+	pWind->SetFont(CRS_HEIGHT * 0.4, BOLD, BY_NAME, "Gramound");
+	pWind->SetPen(MsgColor);
+
+	pWind->DrawString(Code_x, Code_y, "Note");
+	pWind->DrawString(Code_x, Code_y + CRS_HEIGHT / 2, pNote->getContent());
+}
+
+
 void GUI::DrawAcademicYear(const AcademicYear* pY) 
 {
 	graphicsInfo gInfo = pY->getGfxInfo();
@@ -157,6 +181,7 @@ ActionData GUI::GetUserAction(string msg) const
 				switch (ClickedItemOrder)
 				{
 				case ITM_ADD: return ActionData{ ADD_CRS };	//Add course
+				case ITM_AddNote: return ActionData{ ADD_NOTE };	//Add note
 				case ITM_EXIT: return ActionData{ EXIT };		//Exit
 
 				default: return ActionData{ MENU_BAR };	//A click on empty place in menu bar

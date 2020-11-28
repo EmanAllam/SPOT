@@ -6,6 +6,7 @@ using namespace std;
 #include "CMUgraphicsLib\CMUgraphics.h"
 
 class Course;
+class Notezz;
 class AcademicYear;
 //user interface class
 class GUI
@@ -16,6 +17,7 @@ class GUI
 		//Note: Items are ordered here as they appear in the menu
 		//If you want to change the menu items order, just change the order here
 		ITM_ADD,		//Add a new course
+		ITM_AddNote,    //Add note
 
 						//TODO: Add more items names here
 
@@ -56,6 +58,7 @@ public:
 
 	//Drawing functions
 	void DrawCourse(const Course* );
+	void DrawNote(const Notezz* );
 	void DrawAcademicYear(const AcademicYear*);
 	void UpdateInterface() const;
 	

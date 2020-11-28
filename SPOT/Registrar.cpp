@@ -1,5 +1,5 @@
 #include "Registrar.h"
-
+#include "ActionAddNote.h"
 #include "Actions/ActionAddCourse.h"
 
 Registrar::Registrar()
@@ -29,6 +29,9 @@ Action* Registrar::CreateRequiredAction()
 	{
 	case ADD_CRS:	//add_course action
 		RequiredAction = new ActionAddCourse(this);
+		break;
+	case ADD_NOTE:
+		RequiredAction = new ActionAddNote(this);
 		break;
 
 	//TODO: Add case for each action

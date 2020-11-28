@@ -21,12 +21,28 @@ bool StudyPlan::AddCourse(Course* pC, int year, SEMESTER sem)
 	return true;
 }
 
+
+//adds a course to the study plan in certain year, semester
+//year idetifies year number to add course to 1=first, 2 = 2nd,....
+bool StudyPlan::AddNote(Notezz* note)
+{
+	//TODO: add all requried checks to add the course 
+
+	planNotes.push_back(note);
+
+	return true;
+}
+
 void StudyPlan::DrawMe(GUI* pGUI) const
 {
 	//Plan draws all year inside it.
 	for (int i = 0; i < plan.size(); i++)
 		plan[i]->DrawMe(pGUI);
+
+	for (int i = 0; i < planNotes.size(); i++)
+		planNotes[i]->DrawMe(pGUI);
 }
+
 
 StudyPlan::~StudyPlan()
 {

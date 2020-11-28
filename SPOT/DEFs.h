@@ -4,6 +4,8 @@
 #include <string>
 using namespace std;
 typedef string Course_Code;
+typedef string Note;
+
 
 
 //Semesters
@@ -20,6 +22,7 @@ enum SEMESTER
 enum ActionType
 {
 	ADD_CRS,	//Add a course to study plan
+	ADD_NOTE,   //Add a note to a plan
 	DEL_CRS,	//Delete a course from study plan
 
 

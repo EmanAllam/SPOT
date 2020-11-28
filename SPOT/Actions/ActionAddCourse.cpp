@@ -33,6 +33,7 @@ bool ActionAddCourse::Execute()
 
 		//TODO: given course code, get course title, crd hours from registrar
 		//For now, we will add any dummy values
+		
 		string Title = "Test101";
 		int crd = 0;
 		Course* pC = new Course(code, Title, crd);
