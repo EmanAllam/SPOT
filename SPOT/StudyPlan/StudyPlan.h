@@ -14,12 +14,11 @@ class StudyPlan:public Drawable
 
 	vector<AcademicYear*> plan;	//plan is a list of academic years
 
-	string PlanNotes;
-	vector<Notezz*> planNotes;
+	Notezz* PlanNote;
 public:
 	StudyPlan();
 	bool AddCourse(Course*, int year, SEMESTER);
-	bool AddNote(Notezz*);
+	bool AddNote(std::string);
 	void virtual DrawMe(GUI*) const;
 	virtual ~StudyPlan();
 };

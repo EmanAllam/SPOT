@@ -22,7 +22,8 @@ enum SEMESTER
 enum ActionType
 {
 	ADD_CRS,	//Add a course to study plan
-	ADD_NOTE,   //Add a note to a plan
+	ADD_NOTE, //Add a note to a plan
+	Import_StudyPlan, // Import study plan
 	DEL_CRS,	//Delete a course from study plan
 
 

@@ -9,13 +9,13 @@ using namespace std;
 //Base class for all types of Notes
 class Notezz : public Drawable
 {
-	const string content;		//content
-	bool Done;		//Done or not yet?
+	string content;		//content
+	//bool Done;		//Done or not yet?
 
 public:
-	Notezz(string n_content);
+	Notezz();
 	string getContent() const;
-
+	void AddContent(std::string);
 	void DrawMe(GUI*) const;
 	virtual ~Notezz();
 

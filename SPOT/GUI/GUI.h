@@ -18,6 +18,7 @@ class GUI
 		//If you want to change the menu items order, just change the order here
 		ITM_ADD,		//Add a new course
 		ITM_AddNote,    //Add note
+		ITM_ImportStudyPlan, //Import study plan
 
 						//TODO: Add more items names here
 
@@ -33,9 +34,20 @@ class GUI
 		wx = 15, wy = 15,		//Window starting coordinates
 		StatusBarHeight = 60,	//Status Bar Height
 		MenuBarHeight = 80,		//Menu Bar Height (distance from top of window to bottom line of menu bar)
-		MenuItemWidth = 70;		//Width of each item in the menu
+		MenuItemWidth = 70; 	//Width of each item in the menu
 
-
+		/*
+		YearWidth = 1000,
+		YearHeight = 100,
+		YearSmallWidth = 75,
+		YearSmallHeight = 75,
+		SemWidth = 100,
+		SemHeight = 25,
+		YearBoxSmall_xMargin = 10,
+		YearBoxSmall_yMargin = (YearHeight - YearSmallHeight) / 2,
+		SemBoxSmall_xMargin = 10,
+		SemBoxSmall_yMargin = (YearHeight - SemHeight * 3) / 4;
+		*/
 
 	color DrawColor = BLACK;		//Drawing color
 	color FillColor = YELLOW;		//Filling color (for courses)

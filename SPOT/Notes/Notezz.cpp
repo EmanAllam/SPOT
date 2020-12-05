@@ -1,8 +1,12 @@
 #include "Notezz.h"
 #include "GUI/GUI.h"
+#include <iostream>
+#include <sstream>
+#include <string>
 
-Notezz::Notezz(string n_content):content(n_content)
+Notezz::Notezz()
 {
+	content = "";
 }
 
 Notezz::~Notezz()
@@ -13,6 +17,13 @@ Notezz::~Notezz()
 string Notezz::getContent() const
 {
 	return content;
+}
+
+void Notezz::AddContent(string new_content)
+{	
+	ostringstream stream;
+	stream<< content << new_content << "\n";
+	content = stream.str();
 }
 
 

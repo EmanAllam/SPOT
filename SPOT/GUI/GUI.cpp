@@ -1,8 +1,12 @@
 #include "GUI.h"
 #include "../Courses/Course.h"
-#include "Notezz.h"
+#include "../Notes/Notezz.h"
 #include "../StudyPlan/AcademicYear.h"
 #include <sstream>
+#include <iostream>
+
+
+
 
 GUI::GUI()
 { 
@@ -42,6 +46,7 @@ void GUI::CreateMenu() const
 	string MenuItemImages[ITM_CNT];
 	MenuItemImages[ITM_ADD] = "GUI\\Images\\Menu\\Menu_add_course.jpg";
 	MenuItemImages[ITM_AddNote] = "GUI\\Images\\Menu\\Menu_Add_Note.jpg";
+	MenuItemImages[ITM_ImportStudyPlan] = "GUI\\Images\\Menu\\Menu_StudyPlan.jpg";
 	MenuItemImages[ITM_EXIT] = "GUI\\Images\\Menu\\Menu_Exit.jpg";
 
 	//TODO: Prepare image for each menu item and add it to the list
@@ -106,30 +111,93 @@ void GUI::DrawCourse(const Course* pCrs)
 }
 
 void GUI::DrawNote(const Notezz* pNote)
-{
+{	
 	if (pNote->isSelected())
 		pWind->SetPen(HiColor, 2);
 	else
 		pWind->SetPen(DrawColor, 2);
 	pWind->SetBrush(FillColor);
 	graphicsInfo gInfo = pNote->getGfxInfo();
-	pWind->DrawRectangle(gInfo.x, gInfo.y, gInfo.x + CRS_WIDTH, gInfo.y + CRS_HEIGHT);
-	pWind->DrawLine(gInfo.x, gInfo.y + CRS_HEIGHT / 2, gInfo.x + CRS_WIDTH, gInfo.y + CRS_HEIGHT / 2);
-
+	pWind->DrawRectangle(gInfo.x, gInfo.y, gInfo.x + Note_Width, gInfo.y + Note_Height);
+	pWind->DrawLine(gInfo.x, gInfo.y + Note_Height / 10, gInfo.x + Note_Width, gInfo.y + Note_Height / 10);
+	
 	//Write the content.
-	int Code_x = gInfo.x + CRS_WIDTH * 0.15;
-	int Code_y = gInfo.y + CRS_HEIGHT * 0.05;
-	pWind->SetFont(CRS_HEIGHT * 0.4, BOLD, BY_NAME, "Gramound");
+	int Code_x = gInfo.x + Note_Width * 0.3;
+	int Code_y = gInfo.y;
+	pWind->SetFont(Note_Height * 0.06, BOLD, BY_NAME, "Gramound");
 	pWind->SetPen(MsgColor);
 
-	pWind->DrawString(Code_x, Code_y, "Note");
-	pWind->DrawString(Code_x, Code_y + CRS_HEIGHT / 2, pNote->getContent());
+	pWind->DrawString(Code_x, Code_y, "Notes");
+
+
+	char* context = nullptr;
+	char* pch;
+	char* S = new char[pNote->getContent().length() + 1];
+	strcpy_s(S, pNote->getContent().length() + 1, pNote->getContent().c_str());
+	pch = strtok_s(S, "\n", &context);
+
+	pWind->SetFont(Note_Height * 0.04, BOLD, BY_NAME, "Gramound");
+	int new_margin = NoteLine_yMargin;
+	while (pch != NULL)
+	{	
+		new_margin += NoteLine_yMargin;
+		pWind->DrawString(gInfo.x + Note_Width * 0.05, gInfo.y + Note_Height / 10 + new_margin, pch);
+		pch = strtok_s(NULL, "\n", &context);
+	}
+
+	
+	
 }
 
 
 void GUI::DrawAcademicYear(const AcademicYear* pY) 
 {
 	graphicsInfo gInfo = pY->getGfxInfo();
+
+	pWind->SetPen(DrawColor, 2);
+	pWind->SetBrush(BkGrndColor);
+	pWind->DrawRectangle(gInfo.x , gInfo.y, gInfo.x + YearWidth, gInfo.y + YearHeight );
+	pWind->DrawRectangle(gInfo.x + YearBoxSmall_xMargin, gInfo.y + YearBoxSmall_yMargin, gInfo.x + YearBoxSmall_xMargin + YearSmallWidth, gInfo.y + YearBoxSmall_yMargin + YearSmallHeight);
+
+
+	int Year_x = gInfo.x + YearBoxSmall_xMargin + YearSmallWidth * 0.15;
+	int Year_y = gInfo.y + YearBoxSmall_xMargin+ YearSmallHeight * 0.05;
+	pWind->SetFont(YearSmallWidth * 0.25, BOLD, BY_NAME, "Gramound");
+	pWind->SetPen(MsgColor);
+	ostringstream Yr;
+	Yr << "Year " << pY->Num;
+	pWind->DrawString(Year_x, Year_y, Yr.str());
+
+
+
+	int Sem_x = gInfo.x + YearBoxSmall_xMargin + YearSmallWidth + SemWidth * 0.15;
+	int Sem_y = gInfo.y + YearBoxSmall_yMargin + SemHeight * 0.05;
+	pWind->SetPen(DrawColor, 2);
+	pWind->SetBrush(BkGrndColor);
+	pWind->DrawRectangle(gInfo.x + YearBoxSmall_xMargin * 2 + YearSmallWidth, gInfo.y + SemBoxSmall_yMargin, gInfo.x + YearBoxSmall_xMargin * 2 + YearSmallWidth + SemWidth, gInfo.y + SemBoxSmall_yMargin + SemHeight);
+	pWind->SetFont(SemWidth * 0.2, BOLD, BY_NAME, "Gramound");
+	pWind->SetPen(MsgColor);
+	pWind->DrawString(Sem_x, Sem_y, "FALL");
+
+	pWind->SetPen(DrawColor, 2);
+	pWind->SetBrush(BkGrndColor);
+	pWind->DrawRectangle(gInfo.x + YearBoxSmall_xMargin * 2 + YearSmallWidth, gInfo.y + SemBoxSmall_yMargin * 2 + SemHeight, gInfo.x + YearBoxSmall_xMargin * 2 + YearSmallWidth + SemWidth, gInfo.y + SemBoxSmall_yMargin * 2 + SemHeight * 2);
+	pWind->SetFont(SemWidth * 0.2, BOLD, BY_NAME, "Gramound");
+	pWind->SetPen(MsgColor);
+	pWind->DrawString(Sem_x, Sem_y + SemBoxSmall_yMargin + SemHeight, "SPRING");
+
+	pWind->SetPen(DrawColor, 2);
+	pWind->SetBrush(BkGrndColor);
+	pWind->DrawRectangle(gInfo.x + YearBoxSmall_xMargin * 2 + YearSmallWidth, gInfo.y + SemBoxSmall_yMargin * 3 + SemHeight * 2, gInfo.x + YearBoxSmall_xMargin * 2 + YearSmallWidth + SemWidth, gInfo.y + SemBoxSmall_yMargin * 3 + SemHeight * 3);
+	pWind->SetFont(SemWidth * 0.2, BOLD, BY_NAME, "Gramound");
+	pWind->SetPen(MsgColor);
+	pWind->DrawString(Sem_x, Sem_y + SemBoxSmall_yMargin * 2 + SemHeight * 2, "SUMMER");
+
+
+
+
+
+
 
 	///TODO: compelete this function to:
 	//		1- Draw a rectangle for the academic year 
@@ -181,7 +249,8 @@ ActionData GUI::GetUserAction(string msg) const
 				switch (ClickedItemOrder)
 				{
 				case ITM_ADD: return ActionData{ ADD_CRS };	//Add course
-				case ITM_AddNote: return ActionData{ ADD_NOTE };	//Add note
+				case ITM_AddNote: return ActionData{ ADD_NOTE };
+				case ITM_ImportStudyPlan: return ActionData{ Import_StudyPlan };//Add note
 				case ITM_EXIT: return ActionData{ EXIT };		//Exit
 
 				default: return ActionData{ MENU_BAR };	//A click on empty place in menu bar

@@ -2,7 +2,6 @@
 #include "..\Registrar.h"
 #include "../Courses/UnivCourse.h"
 #include "Notes/Notezz.h"
-
 #include <iostream>
 ActionAddNote::ActionAddNote(Registrar* p) :Action(p)
 {
@@ -16,6 +15,10 @@ bool ActionAddNote::Execute()
 	pGUI->PrintMsg("Add Note to describe the plan: ");
 	string content = pGUI->GetSrting();
 
+	StudyPlan* pS = pReg->getStudyPlay();
+	pS->AddNote(content);
+
+	/*
 	ActionData actData = pGUI->GetUserAction("Select the place where you want the note to be added");
 
 
@@ -35,6 +38,8 @@ bool ActionAddNote::Execute()
 
 		return true;
 	}
+	*/
+	return true;
 }
 
 ActionAddNote::~ActionAddNote()

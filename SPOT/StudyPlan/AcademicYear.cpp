@@ -1,7 +1,10 @@
 #include "AcademicYear.h"
 #include "../GUI/GUI.h"
 
-AcademicYear::AcademicYear()
+
+
+
+AcademicYear::AcademicYear(int num) : Num (num)
 {
 	//TODO: make all necessary initializations
 }
@@ -31,10 +34,18 @@ void AcademicYear::DrawMe(GUI* pGUI) const
 	pGUI->DrawAcademicYear(this);
 	//Draw all semesters inside this year by iterating on each semester list
 	//to get courses and draw each course
-	
+	int x;
+	int y = GfxInfo.y + SemBoxSmall_yMargin;
 	for (int sem = FALL; sem < SEM_CNT; sem++)
+	{	
+		x = GfxInfo.x + YearBoxSmall_xMargin * 3 + YearSmallWidth + SemWidth;
 		for (auto it = YearCourses[sem].begin(); it != YearCourses[sem].end(); ++it)
-		{
+		{	
+			graphicsInfo gInfo{ x, y };
+			(*it)->setGfxInfo(gInfo);
 			(*it)->DrawMe(pGUI);	//call DrawMe for each course in this semester
+			x += Course_xMargin + CRS_WIDTH;
 		}
+		y += SemBoxSmall_yMargin + SemHeight;
+	}
 }

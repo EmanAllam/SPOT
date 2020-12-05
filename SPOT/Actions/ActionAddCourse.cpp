@@ -1,10 +1,11 @@
 #include "ActionAddCourse.h"
 #include "..\Registrar.h"
 #include "../Courses/UnivCourse.h"
-
 #include <iostream>
+
 ActionAddCourse::ActionAddCourse(Registrar* p):Action(p)
 {
+	Registrar* reg = p;
 }
 
 bool ActionAddCourse::Execute()
@@ -17,7 +18,7 @@ bool ActionAddCourse::Execute()
 	//TODO: add input validation
 
 
-	ActionData actData = pGUI->GetUserAction("Select a year to add coures to:(To be implemented in phase1) we will just draw coures where user clicks");
+	ActionData actData = pGUI->GetUserAction("Select a year to add coures to: ");
 	//TODO: add input validation
 
 	int x, y;

@@ -19,6 +19,7 @@ public:
 	bool ExecuteAction(Action*);
 	void UpdateInterface();
 	StudyPlan* getStudyPlay() const;
+	void setStudyPlan(StudyPlan*);
 
 	void Run();
 

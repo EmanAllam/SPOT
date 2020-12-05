@@ -150,6 +150,9 @@
       <Filter>Actions</Filter>
     </ClCompile>
     <ClCompile Include="Notes\Notezz.cpp" />
+    <ClCompile Include="ActionImportStudyPlan.cpp">
+      <Filter>Actions</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GUI\GUI.h">
@@ -237,6 +240,9 @@
       <Filter>Actions</Filter>
     </ClInclude>
     <ClInclude Include="Notes\Notezz.h" />
+    <ClInclude Include="ActionImportStudyPlan.h">
+      <Filter>Actions</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="GUI\CMUgraphicsLib\Manual.txt">

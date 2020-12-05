@@ -1,6 +1,9 @@
 #include "Registrar.h"
 #include "ActionAddNote.h"
 #include "Actions/ActionAddCourse.h"
+#include "ActionImportStudyPlan.h"
+#include <iostream>
+using namespace std;
 
 Registrar::Registrar()
 {
@@ -20,6 +23,12 @@ StudyPlan* Registrar::getStudyPlay() const
 	return pSPlan;
 }
 
+void Registrar::setStudyPlan(StudyPlan* stdPlan)
+{
+	pSPlan = stdPlan;
+	cout << "STUDYPLAN SET" << endl;
+}
+
 Action* Registrar::CreateRequiredAction() 
 {	
 	ActionData actData = pGUI->GetUserAction("Pick and action...");
@@ -33,12 +42,14 @@ Action* Registrar::CreateRequiredAction()
 	case ADD_NOTE:
 		RequiredAction = new ActionAddNote(this);
 		break;
+	case Import_StudyPlan:
+		RequiredAction = new ActionImportStudyPlan(this);
+		break;
 
 	//TODO: Add case for each action
 	
-	/*case EXIT:
+	case EXIT:
 		break;
-		*/
 	}
 	return RequiredAction;
 }

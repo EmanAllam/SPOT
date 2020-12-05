@@ -8,9 +8,9 @@
 class AcademicYear:public Drawable
 {
 	int TotalCredits=0;		//total no. of credit hours for courses registred in this year
-	int TotalUnivCredits=0, TotalMajorCredits=0,
-		TotalTrackCredits=0, TotalConcentrationCredits=0,
-		TotalMinorCredits=0;
+	int TotalUnivCredits = 0, TotalMajorCredits = 0,
+		TotalTrackCredits = 0, TotalConcentrationCredits = 0,
+		TotalMinorCredits = 0;
 
 	//Each year is an array of 3 lists of courses. Each list cossrsponds to a semester
 	//So YearCourses[FALL] is the list of FALL course in that year
@@ -19,10 +19,11 @@ class AcademicYear:public Drawable
 	list<Course*> YearCourses[SEM_CNT];
 	
 public:
-	AcademicYear();
+	const int Num;
+	AcademicYear(int);
 	virtual ~AcademicYear();
 
-	bool AddCourse(Course*, SEMESTER );
+	bool AddCourse(Course*, SEMESTER);
 	
 
 	void virtual DrawMe(GUI*) const;

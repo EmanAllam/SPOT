@@ -164,6 +164,7 @@
     <ClCompile Include="Notes\Notezz.cpp" />
     <ClCompile Include="Registrar.cpp" />
     <ClCompile Include="ActionAddNote.cpp" />
+    <ClCompile Include="ActionImportStudyPlan.cpp" />
     <ClCompile Include="StudyPlan\AcademicYear.cpp" />
     <ClCompile Include="StudyPlan\StudyPlan.cpp" />
   </ItemGroup>
@@ -194,6 +195,7 @@
     <ClInclude Include="GUI\GUI.h" />
     <ClInclude Include="DEFs.h" />
     <ClInclude Include="ActionAddNote.h" />
+    <ClInclude Include="ActionImportStudyPlan.h" />
     <ClInclude Include="Notes\Notezz.h" />
     <ClInclude Include="Registrar.h" />
     <ClInclude Include="Rules.h" />
